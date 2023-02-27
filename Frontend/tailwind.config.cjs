@@ -5,7 +5,15 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
     ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+
+      },
+      fontFamily: {
+        baloo: ["'Baloo Bhai 2'", 'cursive'],
+        roboto: ['Roboto', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }
