@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         baloo: ["'Baloo Bhai 2'", 'cursive'],
         roboto: ['Roboto', 'sans-serif']
+      },
+      backgroundImage: {
+        'loginImage': 'url("/LoginImage.png")'
       }
     },
   },
