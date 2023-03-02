@@ -1,37 +1,30 @@
 import React from 'react'
+import buyer from '../../assets/template_buyer.svg'
 
 
-
-export const Table = ({categories, rows}) =>{
+export const TableCliente = ({categories, rows}) =>{
     return(
         <div className="container mx-auto mt-20 ">
             <div className="flex flex-col">
                 <div className="overflow-x-auto">
-                    <div className="py-3 pl-2">
-                        <div className="relative max-w-xs">
-                            <label htmlFor="hs-table-search" className="sr-only">
-                                Search
-                            </label>
-                            <input
-                                type="text"
-                                name="hs-table-search"
-                                id="hs-table-search"
-                                className="block w-full p-3 pl-10 text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-                                placeholder="Search..."
-                            />
-                            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                                <svg
-                                    className="h-3.5 w-3.5 text-gray-400"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                </svg>
-                            </div>
-                        </div>
+                    <div className="flex  justify-between py-3 pl-2">
+                        
+                                
+
+                                <div className='w-2/3 space-x-4'>
+                                    <button className='py-2 w-1/6  bg-slate-300 rounded-l-lg rounded-r-lg'><i className="fa-solid fa-filter"></i> Filtrar </button>
+                                    <button className='py-2 w-1/5 bg-blue-600 rounded-l-lg rounded-r-lg text-white'> <i className="fa-solid fa-plus"></i> Añadir Cliente </button>
+                                </div>
+                                
+
+                                <input
+                                    type="text"
+                                    name="hs-table-search"
+                                    id="hs-table-search"
+                                    className="w-1/4 px-2 mx-2 block text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                                    placeholder="Search..."
+                                />  
+                                  
                     </div>
 
                     <div className="p-1.5 w-full inline-block align-middle">
@@ -57,7 +50,8 @@ export const Table = ({categories, rows}) =>{
                                         {categories.map((element) => { return(
                                             <th
                                                 scope="col"
-                                                className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                                                key={element}
+                                                className="font-roboto px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                                             >
                                                 {element}
                                             </th>
@@ -66,20 +60,20 @@ export const Table = ({categories, rows}) =>{
                                             scope="col"
                                             className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                                         >
-                                            Edit
+                                            
                                         </th>
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                                         >
-                                            Delete
+                                            {/* aca tengo una duda, si comento estos dos ultimos headers no se coloca en gris, que es lo que segmenta esto aca? */}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
                                     {rows.map((element) => {
                                         return (
-                                            <tr>
+                                            <tr key={element.cedula} className='bg-white'>
                                                 <td className="py-3 pl-4">
                                                     <div className="flex items-center h-5">
                                                         <input
@@ -94,8 +88,14 @@ export const Table = ({categories, rows}) =>{
                                                         </label>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                                    {element.name}
+                                                <td className="flex gap-4 px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                                                    <div className='w-16'>
+                                                        <img src={buyer} alt="profile_photo" className='rounded-full'/>
+                                                    </div>
+                                                    <div className='flex flex-col'>
+                                                        <span className='text-bold'>{element.name}</span>
+                                                        <span className='text-gray-500'>{element.email}</span>
+                                                    </div>
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                                                     {element.cedula}
@@ -108,18 +108,18 @@ export const Table = ({categories, rows}) =>{
                                                 </td>
                                                 <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                                     <a
-                                                        className="text-green-500 hover:text-green-700"
+                                                        className="text-slate-500 hover:text-green-500"
                                                         href="#"
                                                     >
-                                                        Edit
+                                                    <i className="fa-solid fa-pen"></i>
                                                     </a>
                                                 </td>
                                                 <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                                     <a
-                                                        className="text-red-500 hover:text-red-700"
+                                                        className="text-slate-500 hover:text-red-500"
                                                         href="#"
                                                     >
-                                                        Delete
+                                                    <i className="fa-regular fa-trash-can"></i>
                                                     </a>
                                                 </td>
                                             </tr>

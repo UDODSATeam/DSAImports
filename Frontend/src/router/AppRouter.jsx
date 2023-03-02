@@ -5,7 +5,7 @@ import { DSARoutes } from "../dsaimports/routes/DSARoutes";
 
 export const AppRouter = () => {
 
-    const status = 'authenticated'; //authenticated (demás rutas), not-authenticated (login)
+    const status = 'not-authenticated'; //authenticated (demás rutas), not-authenticated (login)
 
     return (
         <Routes>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../../../assets/logo.svg'
-import { Table } from '../../../components/table/table.component'
-
+import { TableCliente } from '../../../components/table_clientes/table_cliente.component'
+import { TableInventario } from '../../../components/table_inventario/table_inventario.component'
 
 
 
@@ -34,21 +34,24 @@ const tableRowsClients = [
     {
         id: '1',
         name:'Juansito Teto',
-        cedula:'23232223',
+        email:'example@gmail.com',
+        cedula:'21232223',
         telefono:'0424-012-1213',
         direccion: 'Avenida Intercomunal, Barcelona'
     },
     {   
         id:'2',
         name:'Juansito Teto',
-        cedula:'23232223',
+        email:'example@gmail.com',
+        cedula:'23232423',
         telefono:'0424-012-1213',
         direccion: 'Avenida Intercomunal, Barcelona'
     },
     {
         id:'3',
         name:'Juansito Teto',
-        cedula:'23232223',
+        email:'example@gmail.com',
+        cedula:'23262223',
         telefono:'0424-012-1213',
         direccion: 'Avenida Intercomunal, Barcelona'
     },
@@ -69,23 +72,25 @@ export const Gerente = () => {
                     />
                 </div>
                 <h1 
-                className={'text-white origin-left font-medium text-xl duration-300'}>
+                className={'text-white py-6 font-baloo origin-left font-medium text-5xl duration-300'}>
                     Gerente
                 </h1>
                 <ul>
-                    <li onClick={() => {setVentana('gestion')}} className='text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'>Gestionar Clientes</li>
-                    <li className='text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'>Gestionar Productos</li>
-                    <li className='text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'>Historial de Ventas</li>
-                    <li onClick={() => {setVentana('inventario')}} className='text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'>Inventario</li>
+                    <li onClick={() => {setVentana('gestion')}} className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-users"></i>Gestionar Clientes</li>
+                    <li className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-table"></i>Gestionar Productos</li>
+                    <li className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-clock-rotate-left"></i>Historial de Ventas</li>
+                    <li onClick={() => {setVentana('inventario')}} className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-boxes-stacked"></i>Inventario</li>
                 </ul>
             </div>
-            <div className='p-7 text-2x1 font-semibold flex-1 h-screen'>
-                <h1>Home Page</h1>
+            <div className='text-2x1 font-semibold flex-1 h-screen w-full bg-gray-100'>
+                <div className='pt-8 text-center bg-white'>
+                    <h1 className='pb-4 text-6xl font-baloo text-center border-b-2 border-b-slate-600'>Bienvenido</h1>    
+                </div>
                 {
-                    ventana == 'gestion'? <Table categories={categoriesClientes} rows={tableRowsClients}></Table> : null
+                    ventana == 'gestion'? <TableCliente categories={categoriesClientes} rows={tableRowsClients}></TableCliente> : null
                 }
                 {
-                    ventana == 'inventario'? <Table categories={categoriesInventario} rows={tableRowsInventario}></Table> : null
+                    ventana == 'inventario'? <TableInventario categories={categoriesInventario} rows={tableRowsInventario}></TableInventario> : null
                 }
             </div>
         </div>
