@@ -2,31 +2,68 @@ import React, { useState } from 'react'
 import logo from '../../../assets/logo.svg'
 import { TableCliente } from '../../../components/table_clientes/table_cliente.component'
 import { TableInventario } from '../../../components/table_inventario/table_inventario.component'
-
-
+import { ModalProducto } from '../../../components/modal_producto/modalProducto.component'
+import { ModalDelete } from '../../../components/modal_delete/modal_delete.component'
+import { TableVentas } from '../../../components/table_ventas/table_ventas.component'
 
 const categoriesClientes = ['Nombre', 'Cedula', 'Telefono', 'Dirección']
-const categoriesInventario = ['Nombre', 'Categoría', 'Precio', 'Descripcion']
+const categoriesInventario = ['Nombre', 'Categoría', 'Precio', 'Descripcion', 'Cantidad', 'Presentación']
+const categoriesHistorial = ['ID Venta', 'Monto Total', 'Fecha Canc.', 'Código Cliente', 'Código Nota entrega']
+
+
+const tableRowsVentas = [
+    {
+        id: '1',
+        montoTotal:'1920$',
+        fechaCancelacion:'03-09-2023',
+        cod_cliente: '1',
+        cod_notaEntrega:'20'
+    
+    },
+    {
+        id: '2',
+        montoTotal:'2000$',
+        fechaCancelacion:'03-08-2023',
+        cod_cliente: '2',
+        cod_notaEntrega:'52'
+    
+    },
+    {
+        id: '3',
+        montoTotal:'1500$',
+        fechaCancelacion:'03-01-2023',
+        cod_cliente: '3',
+        cod_notaEntrega:'10'
+    
+    },
+]
+
 
 const tableRowsInventario =
 [
     {
         name:'Azucar',
-        cedula:'Bienes',
-        telefono:'28$',
-        direccion: 'Producto sucraloso ideal para otorgar dulzor a los postres'
+        categoria:'Bienes',
+        precio:'28$',
+        descripcion: 'Producto sucraloso ideal para otorgar dulzor a los postres',
+        cantidad:'10',
+        presentacion:'1 Kg.'
     },
     {   
         name:'Pimenton Rojo',
-        cedula:'Vegetales',
-        telefono:'30$',
-        direccion: 'Es Pimenton!'
+        categoria:'Vegetales',
+        precio:'30$',
+        descripcion: 'Es Pimenton!',
+        cantidad:'10',
+        presentacion:'25 Kg.'
     },
     {
         name:'Aguacate',
-        cedula:'Fruta',
-        telefono:'45$',
-        direccion: 'Persea americana, llamado popularmente aguacate, ​​​ palto'
+        categoria:'Fruta',
+        precio:'45$',
+        descripcion: 'Persea americana, llamado popularmente aguacate, ​​​ palto',
+        cantidad:'10',
+        presentacion:'25 Kg.'
     },
 ]
 
@@ -41,7 +78,7 @@ const tableRowsClients = [
     },
     {   
         id:'2',
-        name:'Juansito Teto',
+        name:'Harrier DuBois',
         email:'example@gmail.com',
         cedula:'23232423',
         telefono:'0424-012-1213',
@@ -49,7 +86,7 @@ const tableRowsClients = [
     },
     {
         id:'3',
-        name:'Juansito Teto',
+        name:'Juana Maria',
         email:'example@gmail.com',
         cedula:'23262223',
         telefono:'0424-012-1213',
@@ -61,6 +98,7 @@ const tableRowsClients = [
 
 export const Gerente = () => {
     const [ventana, setVentana] = useState('gestion')
+    
     return(
         <div className='flex'>
             <div 
@@ -77,8 +115,8 @@ export const Gerente = () => {
                 </h1>
                 <ul>
                     <li onClick={() => {setVentana('gestion')}} className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-users"></i>Gestionar Clientes</li>
-                    <li className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-table"></i>Gestionar Productos</li>
-                    <li className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-clock-rotate-left"></i>Historial de Ventas</li>
+                    <li onClick={() => {setVentana('gestionProducto')}} className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-table"></i>Gestionar Productos</li>
+                    <li onClick={() => {setVentana('historial')}} className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-clock-rotate-left"></i>Historial de Ventas</li>
                     <li onClick={() => {setVentana('inventario')}} className='text-sm flex items-center gap-x-4 gap-y-4 cursor-pointer p-2 hover:bg-slate-600 rounded-md'><i className="fa-solid fa-boxes-stacked"></i>Inventario</li>
                 </ul>
             </div>
@@ -91,6 +129,12 @@ export const Gerente = () => {
                 }
                 {
                     ventana == 'inventario'? <TableInventario categories={categoriesInventario} rows={tableRowsInventario}></TableInventario> : null
+                }
+                {
+                    ventana == 'historial'? <TableVentas categories={categoriesHistorial} rows={tableRowsVentas}></TableVentas>: null 
+                }
+                {
+                    ventana == 'gestionProducto'?<div className='flex flex-row justify-between'> <ModalProducto buttonContent={'Añadir Producto'}/> <ModalDelete buttonContent={'Eliminar Producto'}/> </div> : null
                 }
             </div>
         </div>

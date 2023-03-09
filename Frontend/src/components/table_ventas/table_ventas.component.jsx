@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import inventory from '../../assets/template_inventory.svg'
 
 
-export const TableInventario = ({categories, rows}) =>{
+export const TableVentas = ({categories, rows}) =>{
     const [searchBar, setSearchBar] =useState('')
-    const [productos, setProductos] = useState(rows)
-    const [filteredProductos, setFilteredProductos] = useState([])
+    const [ventas, setProductos] = useState(rows)
+    const [filteredVentas, setFilteredVentas] = useState([])
 
     useEffect(() =>{
-        setFilteredProductos(productos.filter(producto =>
-          producto.name.toLowerCase().includes(searchBar.toLowerCase())
+        setFilteredVentas(ventas.filter(venta =>
+          venta.id.toLowerCase().includes(searchBar.toLowerCase())
         ))
-      },[searchBar, productos])
+      },[searchBar, ventas])
 
     return(
         <div className="container mx-auto mt-20 ">
@@ -78,7 +77,7 @@ export const TableInventario = ({categories, rows}) =>{
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
-                                    {filteredProductos.map((element) => {
+                                    {filteredVentas.map((element) => {
                                         return (
                                             <tr key={element.cedula} className='bg-white'>
                                                 <td className="py-3 pl-4">
@@ -96,25 +95,19 @@ export const TableInventario = ({categories, rows}) =>{
                                                     </div>
                                                 </td>
                                                 <td className="flex  items-center flex-row gap-4 px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                                    <div className='w-16'>
-                                                        <img src={inventory} alt="profile_photo" className='rounded-full'/>
-                                                    </div>
-                                                        <span className='text-bold'>{element.name}</span>
+                                                <span className='text-bold'>{element.id}</span>
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                                    {element.categoria}
+                                                    {element.montoTotal}
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                                    {element.precio}
+                                                    {element.fechaCancelacion}
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                                    {element.descripcion}
+                                                    {element.cod_cliente}
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                                    {element.cantidad}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                                    {element.presentacion}
+                                                    {element.cod_notaEntrega}
                                                 </td>
                                                
                                             </tr>

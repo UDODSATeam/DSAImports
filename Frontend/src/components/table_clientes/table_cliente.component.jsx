@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import buyer from '../../assets/template_buyer.svg'
+import { ModalCliente } from '../modal_cliente/modalCliente.component'
 
 
 export const TableCliente = ({categories, rows}) =>{
+
+    const [searchBar, setSearchBar] =useState('')
+    const [users, setUsers] = useState(rows)
+    const [filteredUsers, setFilteredUsers] = useState([])
+
+
+    useEffect(() =>{
+        setFilteredUsers(users.filter(users =>
+          users.name.toLowerCase().includes(searchBar.toLowerCase())
+        ))
+      },[searchBar, users])
+
     return(
         <div className="container mx-auto mt-20 ">
             <div className="flex flex-col">
@@ -13,7 +26,7 @@ export const TableCliente = ({categories, rows}) =>{
 
                                 <div className='w-2/3 space-x-4'>
                                     <button className='py-2 w-1/6  bg-slate-300 rounded-l-lg rounded-r-lg'><i className="fa-solid fa-filter"></i> Filtrar </button>
-                                    <button className='py-2 w-1/5 bg-blue-600 rounded-l-lg rounded-r-lg text-white'> <i className="fa-solid fa-plus"></i> Añadir Cliente </button>
+                                    <ModalCliente className='py-2 w-1/5 bg-blue-600 rounded-l-lg rounded-r-lg text-white' buttonContent={"+ Añadir Cliente"}/>
                                 </div>
                                 
 
@@ -23,6 +36,7 @@ export const TableCliente = ({categories, rows}) =>{
                                     id="hs-table-search"
                                     className="w-1/4 px-2 mx-2 block text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                     placeholder="Search..."
+                                    onChange={(event) => setSearchBar(event.target.value)}
                                 />  
                                   
                     </div>
@@ -71,7 +85,7 @@ export const TableCliente = ({categories, rows}) =>{
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
-                                    {rows.map((element) => {
+                                    {filteredUsers.map((element) => {
                                         return (
                                             <tr key={element.cedula} className='bg-white'>
                                                 <td className="py-3 pl-4">
